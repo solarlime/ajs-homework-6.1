@@ -16,14 +16,14 @@ test('Less than 2 letters', () => {
   expect(() => new Character('H', 'Bowman')).toThrow('Incorrect parameters');
 });
 
-test('Less than 2 letters', () => {
+test('More than 10 letters', () => {
   expect(() => new Character('HeroOfTheHeroes', 'Bowman')).toThrow('Incorrect parameters');
 });
 
-test('Less than 2 letters', () => {
+test('Not string', () => {
   expect(() => new Character(666, 'Bowman')).toThrow('Incorrect parameters');
 });
 
-test('Less than 2 letters', () => {
+test('Incorrect type', () => {
   expect(() => new Character('Hero', 'Archer')).toThrow('Incorrect parameters');
 });
