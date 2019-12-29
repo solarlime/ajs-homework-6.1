@@ -1,16 +1,16 @@
 function Character(name, type) {
-  const types = [
-    { type: 'Bowman', attack: 25, armor: 25 },
-    { type: 'Swordsman', attack: 40, armor: 10 },
-    { type: 'Magician', attack: 10, armor: 40 },
-    { type: 'Daemon', attack: 25, armor: 25 },
-    { type: 'Undead', attack: 40, armor: 10 },
-    { type: 'Zombie', attack: 10, armor: 40 },
-  ];
+  const types = {
+    Bowman: { attack: 25, armor: 25 },
+    Swordsman: { attack: 40, armor: 10 },
+    Magician: { attack: 10, armor: 40 },
+    Daemon: { attack: 25, armor: 25 },
+    Undead: { attack: 40, armor: 10 },
+    Zombie: { attack: 10, armor: 40 },
+  };
 
   if (
     (typeof (type) === 'string')
-    && (types.map((item) => item.type).includes(type))
+    && (Object.keys(types).includes(type))
     && (name.length >= 2)
     && (name.length <= 10)
   ) {
@@ -18,9 +18,11 @@ function Character(name, type) {
     this.type = type;
     this.health = 100;
     this.level = 1;
-    this.attack = types.find((item) => item.type === this.type).attack;
-    this.armor = types.find((item) => item.type === this.type).armor;
-    return this;
+    this.attack = Object.entries(types)
+      .find((item) => item[0] === type)[1].attack;
+    this.armor = Object.entries(types)
+      .find((item) => item[0] === type)[1].armor;
+    return;
   }
   throw new Error('Incorrect parameters');
 }
