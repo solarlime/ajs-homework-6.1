@@ -8,23 +8,15 @@ function Character(name, type) {
     Zombie: { attack: 10, armor: 40 },
   };
 
-  if (
-    (typeof (type) === 'string')
-    && (Object.keys(types).includes(type))
-    && (name.length >= 2)
-    && (name.length <= 10)
-  ) {
-    this.name = name;
-    this.type = type;
-    this.health = 100;
-    this.level = 1;
-    this.attack = Object.entries(types)
-      .find((item) => item[0] === type)[1].attack;
-    this.armor = Object.entries(types)
-      .find((item) => item[0] === type)[1].armor;
-    return;
+  if ((typeof (name) !== 'string') || !(type in types) || (name.length < 2) || (name.length > 10)) {
+    throw new Error('Incorrect parameters');
   }
-  throw new Error('Incorrect parameters');
+  this.name = name;
+  this.type = type;
+  this.health = 100;
+  this.level = 1;
+  this.attack = types[type].attack;
+  this.armor = types[type].armor;
 }
 
 export default Character;
